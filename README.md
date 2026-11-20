@@ -63,19 +63,7 @@ et [docs/STRUCTURE.md](docs/STRUCTURE.md).
   automatique des pochettes** pour tout désactiver. Hors-ligne, rien n'échoue : un jeu non résolu n'est retenté qu'après 7 jours.
 - Les images sont stockées dans le dossier de données (`covers/`) et supprimées avec le jeu.
 
-## Écarts assumés par rapport aux maquettes
 
-Les éléments suivants des maquettes nécessitent des données qu'une application locale ne possède pas ; ils ont été
-remplacés par des équivalents réellement fonctionnels :
-
-- **Succès / trophées** (ex. « Légende de Dogtown ») → *statistiques locales* (temps total, favoris, jeu le plus joué).
-- **Badges « Vérifié », « MAJ requise », FPS, version** → état réel : *Prêt* / *Introuvable* / *En cours*.
-- **Transfert vers le NVMe, matériel détecté (CPU/GPU), profils d'optimisation** → non implémentés ;
-  l'occupation réelle des disques est affichée et une alerte apparaît au-delà de 90 %.
-- **Archive zip des sauvegardes** → copie JSON datée de la bibliothèque.
-- **Polices** : si Space Grotesk / Manrope / JetBrains Mono sont installées sur la machine elles sont utilisées,
-  sinon repli sur les polices système (voir la section « Polices » de l'installation).
-- **Jaquettes** : recherchées en ligne ; en leur absence, générées automatiquement (dégradé + initiale).
 
 ## Licence
 
