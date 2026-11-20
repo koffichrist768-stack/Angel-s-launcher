@@ -1,0 +1,78 @@
+{
+  "name": "angels-launcher",
+  "version": "1.0.0",
+  "description": "Angel's Launcher — Launcher de jeux de bureau local (Electron)",
+  "main": "main/main.js",
+  "author": "Angel's Launcher",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "test": "node tests/smoke.test.js",
+    "dist": "electron-builder --publish never",
+    "dist:win": "electron-builder --win --x64 --publish never",
+    "pack:win": "electron-builder --win dir --x64 --publish never --config.win.signAndEditExecutable=false"
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.angels.launcher",
+    "productName": "Angel's Launcher",
+    "copyright": "Angel's Launcher — MIT",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main/**",
+      "src/**",
+      "assets/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Angels Launcher",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "uninstallDisplayName": "Angel's Launcher",
+      "deleteAppDataOnUninstall": false,
+      "language": "1036",
+      "artifactName": "Angels-Launcher-Setup-${version}.exe"
+    },
+    "portable": {
+      "artifactName": "Angels-Launcher-Portable-${version}.exe"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    },
+    "mac": {
+      "target": "dmg"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+# build-setup.yml — Construit l'installateur Windows d'Angel's Launcher (Setup.exe + version portable).
+#
+# Déclenchement :
+#   • automatique : à chaque tag de version « vX.Y.Z » poussé sur GitHub → Setup attaché à une Release ;
+#   • manuel      : onglet « Actions » › « Construire le Setup Windows » › « Run workflow » → fichiers dans « Artifacts ».
+#
+# Pour publier une version :
+#   1) mettre à jour "version" dans package.json (ex. 1.2.0) puis commit ;
+#   2) git tag v1.2.0 && git push origin v1.2.0
+name: Construire le Setup Windows
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write   # nécessaire uniquement pour attacher les fichiers à la Release
+
+concurrency:
+  group: setup-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  setup-windows:
+    name: Setup Windows (NSIS + portable)
+    needs: tests
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Vérifier que le tag correspond à la version de package.json
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "v$VERSION" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::Le tag $GITHUB_REF_NAME ne correspond pas à la version de package.json (v$VERSION)."
+            exit 1
+          fi
+
+      - name: Construire le Setup
+        run: npm run dist:win
+        env:
+          # Pas de signature de code par défaut (Windows SmartScreen affichera « éditeur inconnu »).
+          # Pour signer : ajouter les secrets CSC_LINK (certificat .pfx en base64) et CSC_KEY_PASSWORD
+          # dans Settings › Secrets, puis retirer la ligne ci-dessous et décommenter les deux suivantes.
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+          # CSC_LINK: ${{ secrets.CSC_LINK }}
+          # CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+
+      - name: Lister les fichiers produits
+        shell: bash
+        run: ls -lh dist/*.exe
+
+      - name: Publier les fichiers (Artifacts)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Angels-Launcher-Windows
+          path: |
+            dist/*.exe
+            dist/*.exe.blockmap
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Attacher à la Release GitHub
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.exe
+          generate_release_notes: true

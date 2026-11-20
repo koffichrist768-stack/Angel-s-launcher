@@ -1,0 +1,46 @@
+/* theme.css — Jetons de design (DESIGN.md « Aether Launch ») et styles de base */
+:root {
+  --bg: #0D1117;          /* canevas */
+  --panel: #161B22;       /* barre latérale / barre d'outils */
+  --card: #21262D;        /* cartes flottantes */
+  --line: #30363D;        /* bordures */
+  --text: #F0F6FC;
+  --muted: #8B949E;
+  --dim: #484F58;
+  --violet: #8B5CF6;
+  --cyan: #06B6D4;
+  --green: #10B981;
+  --danger: #ffb4ab;
+  --accent: #4cd7f6;      /* couleur d'action principale (modifiable dans Paramètres) */
+  --accent-ink: #003640;  /* texte posé sur --accent */
+  --r: .5rem; --r-lg: 1rem; --r-xl: 1.5rem;
+  --font-head: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  --pad: 2rem;
+}
+/* Variantes d'accent */
+[data-accent="violet"]  { --accent: #a078ff; --accent-ink: #23005c; }
+[data-accent="emerald"] { --accent: #4edea3; --accent-ink: #002113; }
+/* Densité */
+[data-density="compact"] { --pad: 1.1rem; }
+
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--text);
+  font: 400 14px/20px var(--font-body); overflow: hidden;
+}
+h1, h2, h3 { font-family: var(--font-head); letter-spacing: -.02em; }
+h1 { font-size: 36px; line-height: 44px; font-weight: 700; }
+h2 { font-size: 20px; line-height: 28px; font-weight: 600; }
+h3 { font-size: 16px; font-weight: 600; }
+button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; }
+input, select { font: inherit; color: inherit; }
+.mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; }
+.muted { color: var(--muted); }
+.accent { color: var(--accent); }
+.green { color: var(--green); }
+svg.ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+svg.ico.fill { fill: currentColor; stroke: none; }
+::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 8px; }

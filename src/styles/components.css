@@ -1,0 +1,133 @@
+/* components.css — Boutons, cartes de jeu, puces, interrupteurs, modales, toasts */
+
+/* ---------- Boutons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 18px;
+  border-radius: var(--r); background: var(--card); border: 1px solid var(--line); font-weight: 600; transition: .15s; }
+.btn:hover { border-color: var(--violet); background: var(--line); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; font: 700 13px var(--font-head);
+  letter-spacing: .06em; text-transform: uppercase; box-shadow: 0 0 20px rgba(76, 215, 246, .25); }
+.btn.primary:hover { transform: scale(1.02); filter: brightness(1.08); }
+.btn.xl { min-height: 48px; padding: 0 32px; }
+.btn.danger:hover { border-color: var(--danger); color: var(--danger); }
+.btn.sm { min-height: 32px; padding: 0 12px; font-size: 12px; }
+.icon-btn { width: 36px; height: 36px; display: grid; place-items: center; border-radius: var(--r); color: var(--muted); }
+.icon-btn:hover { background: var(--panel); color: var(--text); }
+
+/* ---------- Puces, badges, onglets ---------- */
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--r);
+  background: var(--panel); border: 1px solid var(--line); color: var(--muted); font: 500 11px var(--font-mono); letter-spacing: .04em; white-space: nowrap; }
+button.chip:hover { color: var(--text); }
+.chip.active { background: var(--accent); color: var(--accent-ink); border-color: transparent; font-weight: 700; }
+.chip.ok { color: var(--green); border-color: var(--green); background: rgba(16, 185, 129, .15); }
+.chip.info { color: var(--cyan); border-color: var(--cyan); background: rgba(6, 182, 212, .15); }
+.tabs { display: inline-flex; gap: 4px; padding: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); flex-wrap: wrap; }
+.tab { padding: 6px 14px; border-radius: 6px; color: var(--muted); font-weight: 600; display: inline-flex; gap: 8px; align-items: center; }
+.tab.active { background: var(--accent); color: var(--accent-ink); }
+.tab:not(.active):hover { color: var(--text); background: var(--card); }
+
+/* ---------- Panneaux ---------- */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; }
+.panel h2 { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.panel h2 svg { color: var(--accent); }
+.item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; margin-top: 8px;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r); text-align: left; width: 100%; }
+button.item:hover { border-color: var(--violet); }
+.stat { padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); }
+.stat small { color: var(--muted); display: block; } .stat b { font: 700 22px var(--font-head); }
+.bar { height: 8px; border-radius: 9999px; background: var(--line); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); border-radius: inherit; }
+.bar.violet i { background: var(--violet); }
+.log { font: 500 12px var(--font-mono); padding: 10px 12px; background: var(--bg); border-radius: var(--r); margin-top: 8px; display: flex; gap: 12px; }
+
+/* ---------- Héros ---------- */
+.hero { position: relative; min-height: 340px; border-radius: var(--r-xl); overflow: hidden; margin-bottom: 24px;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; padding: 36px; background-size: cover; background-position: center; border: 1px solid var(--line); }
+.hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg) 8%, rgba(13, 17, 23, .55) 60%, rgba(13, 17, 23, .2)); }
+.hero > * { position: relative; }
+.hero h1 { font-size: 52px; line-height: 56px; text-transform: uppercase; }
+.hero .sub { color: var(--accent); font: 600 24px var(--font-head); text-transform: uppercase; }
+
+/* ---------- Cartes de jeu (2:3) ---------- */
+.card { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 8px 24px rgba(0, 0, 0, .45); transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px -4px rgba(139, 92, 246, .25), 0 0 0 1px rgba(139, 92, 246, .5); }
+.cover { aspect-ratio: 2 / 3; background-size: cover; background-position: center; display: flex; align-items: flex-end; position: relative; }
+.cover .initial { position: absolute; inset: 0; display: grid; place-items: center; font: 700 64px var(--font-head); color: rgba(255, 255, 255, .25); }
+.cover::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, rgba(13, 17, 23, .92) 0%, transparent 45%); }
+.cover-info { position: relative; z-index: 1; padding: 12px; width: 100%; }
+.cover-info h3 { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cover-info .path { font: 500 10px var(--font-mono); color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.badge { position: absolute; top: 8px; left: 8px; z-index: 2; padding: 2px 8px; border-radius: 6px; font: 500 10px var(--font-mono); letter-spacing: .05em; text-transform: uppercase;
+  background: rgba(16, 185, 129, .2); border: 1px solid var(--green); color: var(--green); }
+.badge.off { background: rgba(13, 17, 23, .7); border-color: var(--line); color: var(--muted); }
+.badge.run { background: rgba(6, 182, 212, .2); border-color: var(--cyan); color: var(--cyan); }
+/* z-index 4 : au-dessus du bouton « Jouer » (z-index 2), sinon celui-ci capte les clics des icônes */
+.card-actions { position: absolute; top: 8px; right: 8px; z-index: 4; display: flex; gap: 6px; }
+.card-actions .icon-btn { width: 30px; height: 30px; background: rgba(13, 17, 23, .7); border-radius: 9999px; color: #fff; }
+.card-actions .icon-btn:hover { background: var(--accent); color: var(--accent-ink); }
+.card-actions .icon-btn.on { color: #ff9aa8; }
+.card-actions .icon-btn.on:hover { color: #ff9aa8; background: rgba(13, 17, 23, .9); }
+.card-actions .icon-btn.on svg { fill: currentColor; } /* cœur plein = jeu en favori */
+.card-actions .hov { opacity: 0; transition: opacity .15s; }
+.card:hover .hov, .card:focus-within .hov { opacity: 1; }
+/* Le calque « Jouer » couvre toute la jaquette : il ne doit pas intercepter les clics, seul son bouton central les reçoit */
+.play-overlay { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; opacity: 0; transition: .2s; pointer-events: none; }
+.card:hover .play-overlay, .card:focus-within .play-overlay { opacity: 1; }
+.play-overlay button { pointer-events: auto; width: 60px; height: 60px; border-radius: 9999px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; box-shadow: 0 0 24px rgba(76, 215, 246, .5); }
+.meta { display: flex; justify-content: space-between; gap: 6px; font: 500 11px var(--font-mono); color: var(--muted); margin-top: 4px; }
+.meta b { color: var(--accent); font-weight: 500; }
+
+/* Ligne de liste (Récemment ajoutés) */
+.game-row { display: flex; align-items: center; gap: 16px; padding: 12px; margin-bottom: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); }
+.thumb { width: 56px; height: 72px; border-radius: var(--r); background-size: cover; background-position: center; flex: none; }
+.game-row .info { flex: 1; min-width: 0; } .game-row .info h3 { font-size: 18px; }
+.game-row .info .mono { color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Dossier / disque */
+.disk { padding: 20px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); }
+.disk h3 { font: 700 20px var(--font-head); margin-bottom: 2px; }
+.folder { padding: 16px; margin-bottom: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); cursor: pointer; }
+.folder.sel { background: var(--card); border-color: rgba(76, 215, 246, .45); }
+.folder .path { font: 500 11px var(--font-mono); color: var(--muted); word-break: break-all; }
+
+/* ---------- Formulaires ---------- */
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field label { font-weight: 700; }
+.input { height: 40px; padding: 0 12px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); outline: 0; min-width: 0; flex: 1; }
+.input:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(6, 182, 212, .25); }
+select.input { cursor: pointer; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px; margin-bottom: 10px; background: var(--card); border-radius: var(--r-lg); }
+.toggle-row p { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.toggle { width: 48px; height: 26px; border-radius: 9999px; background: var(--dim); position: relative; flex: none; transition: .2s; }
+.toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 9999px; background: #fff; transition: .2s; }
+.toggle.on { background: var(--accent); } .toggle.on::after { left: 25px; background: var(--accent-ink); }
+.swatch { width: 34px; height: 34px; border-radius: 9999px; border: 2px solid transparent; }
+.swatch.sel { border-color: #fff; }
+table.keys { width: 100%; border-collapse: collapse; } table.keys td { padding: 10px 8px; border-bottom: 1px solid var(--line); }
+kbd { font: 500 12px var(--font-mono); padding: 2px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+
+/* ---------- Modale & toasts ---------- */
+.modal-bg { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(0, 0, 0, .55); backdrop-filter: blur(6px); }
+.modal { width: min(600px, 92vw); max-height: 92vh; overflow-y: auto; padding: 24px; background: rgba(22, 27, 34, .95); border: 1px solid rgba(255, 255, 255, .1); border-radius: var(--r-xl); }
+.modal h2 { margin-bottom: 16px; } .modal .actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+.err { color: var(--danger); min-height: 18px; font-size: 12px; margin-bottom: 6px; }
+#toast-root { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: flex; flex-direction: column; gap: 8px; }
+.toast { padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--r); box-shadow: 0 8px 24px rgba(0, 0, 0, .5); }
+.toast.error { border-left-color: var(--danger); } .toast.success { border-left-color: var(--green); }
+.empty { text-align: center; padding: 56px 20px; color: var(--muted); border: 1px dashed var(--line); border-radius: var(--r-lg); }
+.empty h2 { color: var(--text); margin-bottom: 8px; }
+.meta span { display: inline-flex; align-items: center; gap: 4px; }
+
+/* Recherche de pochette en cours : pulsation discrète de la jaquette */
+.cover.searching { animation: pulse 1.2s ease-in-out infinite; }
+.cover.searching::before { content: 'Recherche…'; pointer-events: none; position: absolute; top: 40%; left: 0; right: 0; text-align: center; z-index: 1; font: 500 11px var(--font-mono); color: var(--accent); }
+@keyframes pulse { 50% { filter: brightness(1.35); } }
+.result { text-align: left; }
+.result small { color: var(--muted); font-family: var(--font-mono); }
+
+/* Choix d'une pochette SteamGridDB : grille de vignettes verticales */
+.pick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px; max-height: 340px; overflow-y: auto; padding: 2px; }
+.pick { position: relative; aspect-ratio: 2 / 3; padding: 0; overflow: hidden; border-radius: var(--r); border: 2px solid transparent; background: var(--bg); }
+.pick img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pick small { position: absolute; right: 4px; bottom: 4px; padding: 1px 6px; border-radius: 6px; background: rgba(13, 17, 23, .8); font: 500 10px var(--font-mono); color: var(--muted); }
+.pick:hover, .pick:focus-visible { border-color: var(--accent); outline: 0; }

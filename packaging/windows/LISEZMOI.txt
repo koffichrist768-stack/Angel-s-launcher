@@ -1,0 +1,25 @@
+ANGEL'S LAUNCHER - Installation (Windows 10 / 11)
+=================================================
+
+INSTALLER
+  1. Clic droit sur le zip > "Extraire tout..."
+  2. Dans le dossier extrait, double-cliquez sur  INSTALLER.bat
+  3. Suivez les messages : l'application est copiee, les raccourcis sont crees
+     (Bureau + menu Demarrer) et le programme apparait dans
+     Parametres > Applications > Applications installees.
+
+  - Aucun droit administrateur requis. Aucun logiciel supplementaire (Node.js inutile).
+  - Relancer INSTALLER.bat met l'application a jour sans toucher a vos donnees.
+
+SANS INSTALLATION (version portable)
+  Double-cliquez directement sur  app\Angel's Launcher.exe
+
+ALERTE WINDOWS "Windows a protege votre PC" (SmartScreen)
+  L'application n'est pas signee numeriquement. Cliquez sur "Informations
+  complementaires" puis "Executer quand meme". Cette alerte n'apparait qu'une fois.
+
+DESINSTALLER
+  Parametres > Applications > Applications installees > Angel's Launcher > Desinstaller
+  (ou double-clic sur Desinstaller.bat dans le dossier d'installation :
+   %LOCALAPPDATA%\Programs\AngelsLauncher).
+  Vos donnees (%APPDATA%\angels-launcher) ne sont supprimees que sur demande.
